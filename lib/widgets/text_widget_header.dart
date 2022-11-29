@@ -35,7 +35,7 @@ class TextWidgetHeader extends SliverPersistentHeaderDelegate
             style: const TextStyle(
               fontFamily: "Signatra",
               fontSize: 30,
-              letterSpacing: 2,
+              letterSpacing: 1,
               color: Colors.white,
             ),
           ),

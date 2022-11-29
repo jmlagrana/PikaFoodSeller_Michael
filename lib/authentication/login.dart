@@ -139,8 +139,8 @@ class _LoginScreenState extends State<LoginScreen>
             child: Padding(
               padding: EdgeInsets.all(15),
               child: Image.asset(
-                  "images/icon.png",
-                  height: 270,
+                  "images/pikafood1.png",
+                  height: 325,
               ),
             ),
           ),
