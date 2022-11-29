@@ -114,6 +114,14 @@ class MyDrawer extends StatelessWidget
                 //   thickness: 2,
                 // ),
 
+                Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child: Text(
+                    "Items in stock : " ,
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                  ),
+                ),
+
                 ListTile(
                   leading: const Icon(Icons.list_alt_rounded, color: Colors.black,),
                   title: const Text(
