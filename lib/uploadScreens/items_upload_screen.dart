@@ -202,7 +202,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
           ),
         ),
         title: const Text(
-          "Uploading New Item",
+          "Upload New Item",
           style: TextStyle(fontSize: 20, fontFamily: "Lobster"),
         ),
         centerTitle: true,
