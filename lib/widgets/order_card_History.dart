@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../mainScreens/history_Detail_Screen.dart';
 import '../mainScreens/order_details_screen.dart';
 import '../model/items.dart';
 
@@ -25,33 +26,44 @@ class OrderCardHistory extends StatelessWidget
     return InkWell(
       onTap: ()
       {
-        Navigator.pop(context);
+        Navigator.push(context, MaterialPageRoute(builder: (c)=> HistoryDetailScreen(orderID: orderID)));
       },
-      child: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.black12,
-                Colors.white54,
+      child: Column(
+        children: [
+          Container(
+            //addtional codes goes here
+            height: 30,
+            color: Colors.grey,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white
+            ),
+            padding: const EdgeInsets.all(5),
+            margin: const EdgeInsets.all(5),
+            height: itemCount! * 50,
+            child: Stack(
+              children: [
+                Padding(padding: EdgeInsets.all(10)),
+                ListView.builder(
+                  itemCount: itemCount,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index)
+                  {
+                    Items model = Items.fromJson(data![index].data()! as Map<String, dynamic>);
+                    return Align(
+                      heightFactor: 0.3,
+                      alignment: Alignment.topCenter,
+                      child: placedOrderDesignWidget(model, context, seperateQuantitiesList![index]),
+                    );
+                  },
+                ),
               ],
-              begin:  FractionalOffset(0.0, 0.0),
-              end:  FractionalOffset(1.0, 0.0),
-              stops: [0.0, 1.0],
-              tileMode: TileMode.clamp,
-            )
-        ),
-        padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.all(10),
-        height: itemCount! * 125,
-        child: ListView.builder(
-          itemCount: itemCount,
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index)
-          {
-            Items model = Items.fromJson(data![index].data()! as Map<String, dynamic>);
-            return placedOrderDesignWidget(model, context, seperateQuantitiesList![index]);
-          },
-        ),
+            ),
+          ),
+
+        ],
       ),
     );
   }

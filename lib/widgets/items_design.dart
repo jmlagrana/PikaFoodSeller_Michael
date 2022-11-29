@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:pika_food/mainScreens/Update_Items_Screen.dart';
 import 'package:pika_food/model/items.dart';
 
 import '../mainScreens/item_detail_screen.dart';
@@ -23,7 +26,7 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
     return InkWell(
       onTap: ()
       {
-        Navigator.push(context, MaterialPageRoute(builder: (c)=> ItemDetailsScreen(model: widget.model)));
+        Navigator.push(context, MaterialPageRoute(builder: (c)=> ItemDetailsScreen (model: widget.model,)));
       },
       splashColor: Colors.amber,
       child: Padding(

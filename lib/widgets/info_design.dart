@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pika_food/global/global.dart';
+import 'package:pika_food/mainScreens/Update_Items_Screen.dart';
 import 'package:pika_food/mainScreens/itemsScreen.dart';
 import 'package:pika_food/model/menus.dart';
+import 'package:pika_food/uploadScreens/items_upload_screen.dart';
 
 import '../mainScreens/seller_dashboard.dart';
 import '../uploadScreens/menus_upload_screen.dart';
@@ -13,8 +15,9 @@ class InfoDesignWidget extends StatefulWidget
 {
   Menus? model;
   BuildContext? context;
+  String? menuID;
 
-  InfoDesignWidget({this.model, this.context});
+  InfoDesignWidget({this.model, this.context, this.menuID});
 
   @override
   _InfoDesignWidgetState createState() => _InfoDesignWidgetState();
@@ -44,11 +47,11 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
         padding: const EdgeInsets.all(5.0),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.grey,
+            color: Colors.orangeAccent,
             borderRadius: BorderRadius.all(Radius.circular(10)),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.orangeAccent,
                 spreadRadius: 2,
                 blurRadius: 2,
                 offset: Offset(0, 3), // changes position of shadow
@@ -98,20 +101,20 @@ class _InfoDesignWidgetState extends State<InfoDesignWidget> {
                       ],
                     ),
                   ),
-                  Container(
-                    child: Center(
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.dashboard,
-                          color: Colors.black,
-                        ),
-                        onPressed: ()
-                        {
-                          Navigator.push(context, MaterialPageRoute(builder: (c)=>  SellerDashboardScreen()));
-                        },
-                      ),
-                    ),
-                  )
+                  // Container(
+                  //   child: Center(
+                  //     child: IconButton(
+                  //       icon: Icon(
+                  //         Icons.dashboard,
+                  //         color: Colors.black,
+                  //       ),
+                  //       onPressed: ()
+                  //       {
+                  //         Navigator.push(context, MaterialPageRoute(builder: (c)=>  SellerDashboardScreen()));
+                  //       },
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ],

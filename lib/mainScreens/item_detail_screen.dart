@@ -118,6 +118,41 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
               ),
             ),
           ),
+
+          //Try button only
+          Center(
+            child: InkWell(
+              onTap: ()
+              {
+                //delete item
+                deleteItem(widget.model!.itemID!);
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.redAccent,
+                        Colors.orangeAccent,
+                      ],
+                      begin:  FractionalOffset(0.0, 0.0),
+                      end:  FractionalOffset(1.0, 0.0),
+                      stops: [0.0, 1.0],
+                      tileMode: TileMode.clamp,
+                    )
+                ),
+                width: MediaQuery.of(context).size.width - 13,
+                height: 50,
+                child: const Center(
+                  child: Text(
+                    "Delete this Item",
+                    style: TextStyle(color: Colors.white, fontSize: 15),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+
         ],
       ),
     );

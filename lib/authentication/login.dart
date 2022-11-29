@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pika_food/authentication/auth_screen.dart';
 import 'package:pika_food/global/global.dart';
 import 'package:pika_food/mainScreens/home_screen.dart';
@@ -89,16 +90,25 @@ class _LoginScreenState extends State<LoginScreen>
         .doc(currentUser.uid)
         .get()
         .then((snapshot) async {
-          if(snapshot.exists)
-          {
-            await sharedPreferences!.setString("uid", currentUser.uid);
-            await sharedPreferences!.setString("email", snapshot.data()!["sellerEmail"]);
-            await sharedPreferences!.setString("name", snapshot.data()!["sellerName"]);
-            await sharedPreferences!.setString("photoUrl", snapshot.data()!["sellerAvatarUrl"]);
+            if(snapshot.exists)
+              {
+                if(snapshot.data()!["status"]=="approved")
+                  {
+                    await sharedPreferences!.setString("uid", currentUser.uid);
+                    await sharedPreferences!.setString("email", snapshot.data()!["sellerEmail"]);
+                    await sharedPreferences!.setString("name", snapshot.data()!["sellerName"]);
+                    await sharedPreferences!.setString("photoUrl", snapshot.data()!["sellerAvatarUrl"]);
 
-            Navigator.pop(context);
-            Navigator.push(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
-          }
+                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
+                  }
+                else
+                  {
+                    firebaseAuth.signOut();
+                    Navigator.pop(context);
+                    Fluttertoast.showToast(msg: "You're account has been restrict \n\nEmail: CustomerService@gmail.com for further assistance",toastLength: Toast.LENGTH_LONG,);
+                  }
+              }
           else
           {
             firebaseAuth.signOut();

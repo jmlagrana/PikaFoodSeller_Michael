@@ -16,7 +16,14 @@ class ShipmentAddressDesign extends StatelessWidget
   final String? orderID;
   final String? totalPurchase;
 
-  ShipmentAddressDesign({this.model, this.orderStatus, this.orderId, this.sellerId, this.orderByUser, this.orderID, this.totalPurchase });
+  ShipmentAddressDesign({
+    this.model,
+    this.orderStatus,
+    this.orderId,
+    this.sellerId,
+    this.orderByUser,
+    this.orderID,
+    this.totalPurchase });
 
   String previousEarnings = "";
   String totalAmount = "";
@@ -178,7 +185,7 @@ class ShipmentAddressDesign extends StatelessWidget
               height: 50,
               child: const Center(
                 child: Text(
-                  "Done",
+                  "Order Packed",
                   style: TextStyle(color: Colors.white, fontSize: 15.0),
                 ),
               ),

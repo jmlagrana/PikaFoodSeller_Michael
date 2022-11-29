@@ -12,19 +12,17 @@ import 'package:pika_food/widgets/progress_bar.dart';
 
 
 
-class ItemsUploadScreen extends StatefulWidget
+class UpdateProducts extends StatefulWidget
 {
   final Menus? model;
-  ItemsUploadScreen({this.model});
+  UpdateProducts(String? itemID, {this.model});
 
 
   @override
-  _ItemsUploadScreenState createState() => _ItemsUploadScreenState();
+  _UpdateProductsState createState() => _UpdateProductsState();
 }
 
-
-
-class _ItemsUploadScreenState extends State<ItemsUploadScreen>
+class _UpdateProductsState extends State<UpdateProducts>
 {
   XFile? imageXFile;
   final ImagePicker _picker = ImagePicker();
@@ -57,8 +55,8 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
           ),
         ),
         title: const Text(
-          "Add New Items",
-          style: TextStyle(fontSize: 30, fontFamily: "Lobster"),
+          "Uploading New Item",
+          style: TextStyle(fontSize: 20, fontFamily: "Lobster"),
         ),
         centerTitle: true,
         automaticallyImplyLeading: true,
@@ -66,52 +64,140 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
           icon: const Icon(Icons.arrow_back, color: Colors.white,),
           onPressed: ()
           {
-            Navigator.push(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
+            clearMenusUploadForm();
           },
         ),
+        actions: [
+          TextButton(
+            child: const Text(
+              "Add",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                fontFamily: "Varela",
+                letterSpacing: 3,
+              ),
+            ),
+            onPressed: uploading ? null : ()=> validateUploadForm(),
+          ),
+        ],
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.white,
-                Colors.black12,
-              ],
-              begin:  FractionalOffset(0.0, 0.0),
-              end:  FractionalOffset(1.0, 0.0),
-              stops: [0.0, 1.0],
-              tileMode: TileMode.clamp,
-            )
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.shop_two, color: Colors.white, size: 200.0,),
-              ElevatedButton(
-                child: const Text(
-                  "Add New Item",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+      body: ListView(
+        children: [
+          uploading == true ? linearProgress() : const Text(""),
+          Container(
+            height: 230,
+            width: MediaQuery.of(context).size.width * 0.8,
+            child: Center(
+              child: AspectRatio(
+                aspectRatio: 16/9,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: FileImage(
+                          File(imageXFile!.path)
+                      ),
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                onPressed: ()
-                {
-                  takeImage(context);
-                },
               ),
-            ],
+            ),
           ),
-        ),
+
+          const Divider(
+            color: Colors.amber,
+            thickness: 1,
+          ),
+          //NAME
+          ListTile(
+            leading: const Icon(Icons.title,  color: Colors.black,),
+            title: Container(
+              width: 250,
+              child: TextField(
+                style: const TextStyle(color: Colors.black),
+                controller: nameController,
+                decoration: const InputDecoration(
+                  hintText: "Name",
+                  hintStyle: TextStyle(color: Colors.grey),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+
+
+          const Divider(
+            color: Colors.amber,
+            thickness: 1,
+          ),
+          //Description
+          ListTile(
+            leading: const Icon(Icons.description,  color: Colors.black,),
+            title: Container(
+              width: 250,
+              child: TextField(
+                style: const TextStyle(color: Colors.black),
+                controller: descriptionController,
+                decoration: const InputDecoration(
+                  hintText: "Description",
+                  hintStyle: TextStyle(color: Colors.grey),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+
+
+          const Divider(
+            color: Colors.amber,
+            thickness: 1,
+          ),
+          //Quantity
+          ListTile(
+            leading: const Icon(Icons.store_rounded,  color: Colors.black,),
+            title: Container(
+              width: 250,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                style: const TextStyle(color: Colors.black),
+                controller: quantityController,
+                decoration: const InputDecoration(
+                  hintText: "Quantity",
+                  hintStyle: TextStyle(color: Colors.grey),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          const Divider(
+            color: Colors.amber,
+            thickness: 1,
+          ),
+
+          //Price
+          ListTile(
+            leading: const Icon(Icons.payments_outlined,  color: Colors.black,),
+            title: Container(
+              width: 250,
+              child: TextField(
+                keyboardType: TextInputType.number,
+                style: const TextStyle(color: Colors.black),
+                controller: priceController,
+                decoration: const InputDecoration(
+                  hintText: "Price",
+                  hintStyle: TextStyle(color: Colors.grey),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          const Divider(
+            color: Colors.amber,
+            thickness: 1,
+          ),
+        ],
       ),
     );
   }

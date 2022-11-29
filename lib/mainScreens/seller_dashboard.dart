@@ -7,17 +7,22 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import '../global/global.dart';
 import '../model/menus.dart';
 
-class SellerDashboardScreen extends StatelessWidget
+class SellerDashboardScreen extends StatefulWidget
 {
+
 
 
   SellerDashboardScreen({Key? key}) :super(key: key);
 
-  final streamChart = FirebaseFirestore.instance
-  // /sellers/S0q2e5y8ysbjPVSJycd9zB228zn2/menus/1669046326757/items/1669046369392
-      .collection("sellers").doc("S0q2e5y8ysbjPVSJycd9zB228zn2").collection("menus").doc("1669046326757").collection("items")
-      .snapshots(includeMetadataChanges: true );
+  @override
+  State<SellerDashboardScreen> createState() => _SellerDashboardScreenState();
+}
 
+class _SellerDashboardScreenState extends State<SellerDashboardScreen> {
+  // /sellers/S0q2e5y8ysbjPVSJycd9zB228zn2/menus/1669046326757/items/1669046369392
+  final streamChart = FirebaseFirestore.instance
+      .collectionGroup("items")
+      .snapshots(includeMetadataChanges: true );
   @override
   Widget build(BuildContext context)
   {
@@ -42,7 +47,7 @@ class SellerDashboardScreen extends StatelessWidget
               List listChart =
               snapshot.data!.docs.map((e){
                 return {
-                  'domain':e.data()['name'],
+                  'domain':e.data()['itemID'],
                   'measure':e.data()['purchased'],
                 };
               }).toList();

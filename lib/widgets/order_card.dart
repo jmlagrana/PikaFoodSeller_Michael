@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../mainScreens/order_details_screen.dart';
+import '../model/address.dart';
 import '../model/items.dart';
 
 
@@ -13,50 +14,66 @@ class OrderCard extends StatelessWidget
   final String? orderID;
   final List<String>? seperateQuantitiesList;
 
+
+
   OrderCard({
     this.itemCount,
     this.data,
     this.orderID,
     this.seperateQuantitiesList,
+
+
+
   });
 
   @override
   Widget build(BuildContext context) {
+
     return InkWell(
       onTap: ()
       {
         Navigator.push(context, MaterialPageRoute(builder: (c)=> OrderDetailsScreen(orderID: orderID)));
       },
-      child: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.black12,
-                Colors.white54,
+      child: Column(
+        children: [
+          Container(
+            //addtional codes goes here
+            height: 30,
+            color: Colors.grey,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white
+            ),
+            padding: const EdgeInsets.all(5),
+            margin: const EdgeInsets.all(5),
+            height: itemCount! * 50,
+            child: Stack(
+              children: [
+                Padding(padding: EdgeInsets.all(10)),
+                ListView.builder(
+                  itemCount: itemCount,
+                  physics: BouncingScrollPhysics(),
+                  itemBuilder: (context, index)
+                  {
+                    Items model = Items.fromJson(data![index].data()! as Map<String, dynamic>);
+                    return Align(
+                      heightFactor: 0.3,
+                      alignment: Alignment.topCenter,
+                      child: placedOrderDesignWidget(model, context, seperateQuantitiesList![index]),
+                    );
+                  },
+                ),
               ],
-              begin:  FractionalOffset(0.0, 0.0),
-              end:  FractionalOffset(1.0, 0.0),
-              stops: [0.0, 1.0],
-              tileMode: TileMode.clamp,
-            )
-        ),
-        padding: const EdgeInsets.all(10),
-        margin: const EdgeInsets.all(10),
-        height: itemCount! * 125,
-        child: ListView.builder(
-          itemCount: itemCount,
-          physics: NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index)
-          {
-            Items model = Items.fromJson(data![index].data()! as Map<String, dynamic>);
-            return placedOrderDesignWidget(model, context, seperateQuantitiesList![index]);
-          },
-        ),
+            ),
+          ),
+
+        ],
       ),
     );
   }
 }
-
 
 Widget placedOrderDesignWidget(Items model, BuildContext context, seperateQuantitiesList)
 {
@@ -95,12 +112,12 @@ Widget placedOrderDesignWidget(Items model, BuildContext context, seperateQuanti
                   ),
                   const Text(
                     "₱ ",
-                    style: TextStyle(fontSize: 16.0, color: Colors.blue),
+                    style: TextStyle(fontSize: 16.0, color: Colors.redAccent),
                   ),
                   Text(
                     model.price.toString(),
                     style: const TextStyle(
-                      color: Colors.blue,
+                      color: Colors.red,
                       fontSize: 18.0,
                     ),
                   ),
@@ -114,11 +131,11 @@ Widget placedOrderDesignWidget(Items model, BuildContext context, seperateQuanti
               Row(
                 children: [
                   const Text(
-                      "x ",
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 14,
-                      ),
+                    "x ",
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 14,
+                    ),
                   ),
                   Expanded(
                     child: Text(

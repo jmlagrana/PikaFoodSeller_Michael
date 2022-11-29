@@ -85,5 +85,6 @@ class _NewOrdersScreenState extends State<NewOrdersScreen>
         ),
       ),
     );
+
   }
 }

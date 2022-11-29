@@ -1,8 +1,13 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:pika_food/global/global.dart';
 import 'package:pika_food/model/menus.dart';
+import 'package:pika_food/splashScreen/splash_screen.dart';
 import 'package:pika_food/uploadScreens/menus_upload_screen.dart';
 import 'package:pika_food/widgets/info_design.dart';
 import 'package:pika_food/widgets/my_drawer.dart';
@@ -29,6 +34,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+  restrictBlockedSellersFromUsingApp() async
+  {
+    await FirebaseFirestore.instance.collection("sellers")
+        .doc(firebaseAuth.currentUser!.uid)
+        .get().then((snapshot)
+        {
+          if(snapshot.data()!["status"] != "approved")
+            {
+              Fluttertoast.showToast(msg: "You're account has been restrict \n\nEmail: CustomerService@gmail.com for further assistance",toastLength: Toast.LENGTH_LONG,);
+
+              firebaseAuth.signOut();
+              Navigator.push(context, MaterialPageRoute(builder: (c)=> MySplashScreen()));
+            }
+        });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    restrictBlockedSellersFromUsingApp();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -165,6 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 staggeredTileBuilder: (c) => StaggeredTile.fit(1),
                 itemBuilder: (context, index)
                 {
+                  //itemMenu = Menus.fromdocuments(snapshot.data!.docs[index].data());
                   Menus model = Menus.fromJson(
                     snapshot.data!.docs[index].data()! as Map<String, dynamic>,
                   );

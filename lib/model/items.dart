@@ -6,13 +6,14 @@ class Items
   String? sellerUID;
   String? itemID;
   String? name;
-
   Timestamp? publishedDate;
   String? thumbnailUrl;
   String? description;
   String? status;
   int? quantity;
   int? price;
+  String? sellerName;
+
 
   Items({
     this.menuID,
@@ -25,6 +26,8 @@ class Items
     this.description,
     this.status,
     this.quantity,
+    this.sellerName,
+    this.price,
   });
 
   Items.fromJson(Map<String, dynamic> json)
@@ -33,13 +36,14 @@ class Items
     sellerUID = json['sellerUID'];
     itemID = json['itemID'];
     name = json['name'];
-
     publishedDate = json['publishedDate'];
     thumbnailUrl = json['thumbnailUrl'];
     description = json['description'];
     status = json['status'];
     quantity = json['quantity'];
     price = json['price'];
+
+    sellerName = json['sellerName'];
   }
 
   Map<String, dynamic> toJson()
@@ -56,6 +60,7 @@ class Items
     data['description'] = description;
     data['status'] = status;
     data['quantity'] = quantity;
+    data['sellerName'] = sellerName;
 
     return data;
   }

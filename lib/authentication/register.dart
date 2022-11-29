@@ -158,7 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen>
       "sellerAvatarUrl": sellerImageUrl,
       "phone": phoneController.text.trim(),
       "address": completeAddress,
-      "status": "approved",
+      "status": "not approved",
       "earnings": 0.0,
     });
 

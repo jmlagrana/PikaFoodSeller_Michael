@@ -6,7 +6,7 @@ import 'package:pika_food/mainScreens/feedbacks_screen.dart';
 import 'package:pika_food/mainScreens/history_screen.dart';
 import 'package:pika_food/mainScreens/home_screen.dart';
 import 'package:pika_food/mainScreens/new_orders_screen.dart';
-import 'package:pika_food/mainScreens/pending_screen.dart';
+import 'package:pika_food/mainScreens/orders.dart';
 import 'package:pika_food/mainScreens/seller_dashboard.dart';
 import 'package:provider/provider.dart';
 
@@ -97,27 +97,27 @@ class MyDrawer extends StatelessWidget
                   color: Colors.grey,
                   thickness: 2,
                 ),
-                ListTile(
-                  leading: const Icon(Icons.dashboard, color: Colors.black,),
-                  title: const Text(
-                    "Dashboard",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onTap: ()
-                  {
-                    Navigator.push(context, MaterialPageRoute(builder: (c)=>  SellerDashboardScreen()));
-                  },
-                ),
-                const Divider(
-                  height: 10,
-                  color: Colors.grey,
-                  thickness: 2,
-                ),
+                // ListTile(
+                //   leading: const Icon(Icons.dashboard, color: Colors.black,),
+                //   title: const Text(
+                //     "Dashboard",
+                //     style: TextStyle(color: Colors.black),
+                //   ),
+                //   onTap: ()
+                //   {
+                //     Navigator.push(context, MaterialPageRoute(builder: (c)=>  SellerDashboardScreen()));
+                //   },
+                // ),
+                // const Divider(
+                //   height: 10,
+                //   color: Colors.grey,
+                //   thickness: 2,
+                // ),
 
                 ListTile(
-                  leading: const Icon(Icons.pending, color: Colors.black,),
+                  leading: const Icon(Icons.list_alt_rounded, color: Colors.black,),
                   title: const Text(
-                    "Pending",
+                    "Orders",
                     style: TextStyle(color: Colors.black),
                   ),
                   onTap: ()
@@ -125,64 +125,27 @@ class MyDrawer extends StatelessWidget
                     Navigator.push(context, MaterialPageRoute(builder: (c)=>  PendingScreen()));
                   },
                 ),
-                Positioned(
-                  child: Stack(
-                    children: [
-                      const Icon(
-                        Icons.brightness_1,
-                        size: 40.0,
-                        color: Colors.red,
-                      ),
-                      Positioned(
-                        child: Stack(
-                          children: [
-                            const Icon(
-                              Icons.brightness_1,
-                              size: 20.0,
-                              color: Colors.redAccent,
-                            ),
-                            Positioned(
-                              top: 3,
-                              right: 4,
-                              child: Center(
-                                child: Consumer<CartItemCounter>(
-                                  builder: (context, counter, c)
-                                  {
-                                    return Text(
-                                      counter.count.toString(),
-                                      style: const TextStyle(color: Colors.white, fontSize: 12),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 const Divider(
                   height: 10,
                   color: Colors.grey,
                   thickness: 2,
                 ),
-                ListTile(
-                  leading: const Icon(Icons.outdoor_grill, color: Colors.black,),
-                  title: const Text(
-                    "Confirm Pick Up",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  onTap: ()
-                  {
-                    Navigator.push(context, MaterialPageRoute(builder: (c)=>  NewOrdersScreen()));
-                  },
-                ),
-                const Divider(
-                  height: 10,
-                  color: Colors.grey,
-                  thickness: 2,
-                ),
+                // ListTile(
+                //   leading: const Icon(Icons.outdoor_grill, color: Colors.black,),
+                //   title: const Text(
+                //     "Confirm Pick Up",
+                //     style: TextStyle(color: Colors.black),
+                //   ),
+                //   onTap: ()
+                //   {
+                //     Navigator.push(context, MaterialPageRoute(builder: (c)=>  NewOrdersScreen()));
+                //   },
+                // ),
+                // const Divider(
+                //   height: 10,
+                //   color: Colors.grey,
+                //   thickness: 2,
+                // ),
                 ListTile(
                   leading: const Icon(Icons.history, color: Colors.black,),
                   title: const Text(
@@ -207,7 +170,7 @@ class MyDrawer extends StatelessWidget
                   ),
                   onTap: ()
                   {
-                    Navigator.push(context, MaterialPageRoute(builder: (c)=>  SellerDashboardScreen()));
+                    //Navigator.push(context, MaterialPageRoute(builder: (c)=>  SellerDashboardScreen()));
                   },
                 ),
 

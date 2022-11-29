@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 
 class Menus
 {
@@ -43,5 +44,17 @@ class Menus
     data['status'] = status;
 
     return data;
+  }
+
+  factory Menus.fromdocuments(map){
+    return Menus(
+        menuID : map["menuID"],
+        sellerUID : map['sellerUID'],
+        menuTitle : map['menuTitle'],
+        menuInfo : map['menuInfo'],
+        publishedDate : map['publishedDate'],
+        thumbnailUrl : map['thumbnailUrl'],
+        status : map['status'],
+    );
   }
 }

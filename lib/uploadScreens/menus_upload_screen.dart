@@ -194,7 +194,7 @@ class _MenusUploadScreenState extends State<MenusUploadScreen>
           ),
         ),
         title: const Text(
-          "Uploading New Menu",
+          "Add New Menu",
           style: TextStyle(fontSize: 20, fontFamily: "Lobster"),
         ),
         centerTitle: true,
