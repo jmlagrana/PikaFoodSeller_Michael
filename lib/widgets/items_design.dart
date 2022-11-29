@@ -26,7 +26,7 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
     return InkWell(
       onTap: ()
       {
-        Navigator.push(context, MaterialPageRoute(builder: (c)=> ItemDetailsScreen (model: widget.model,)));
+        Navigator.push(context, MaterialPageRoute(builder: (c)=> ItemDetailsScreen ()));
       },
       splashColor: Colors.amber,
       child: Padding(
