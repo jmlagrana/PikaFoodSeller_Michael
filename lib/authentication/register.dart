@@ -160,6 +160,12 @@ class _RegisterScreenState extends State<RegisterScreen>
       "address": completeAddress,
       "status": "not approved",
       "earnings": 0.0,
+      "1_oneStar": 0,
+      "2_twoStar": 0,
+      "3_threeStar": 0,
+      "4_fourStar": 0,
+      "5_fiveStar": 0,
+      "rating": 0,
     });
 
     //save data locally
